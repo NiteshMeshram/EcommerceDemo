@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ChildCategory" representedClassName="ChildCategory" syncable="YES">
+        <attribute name="subCategoryId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductlCategory" inverseName="childCategoryDetails" inverseEntity="ProductlCategory" syncable="YES"/>
+    </entity>
+    <entity name="ProductlCategory" representedClassName="ProductlCategory" syncable="YES">
+        <attribute name="catagoryName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="categoryId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="childCategoryDetails" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChildCategory" inverseName="parentCategory" inverseEntity="ChildCategory" syncable="YES"/>
+        <relationship name="productDetails" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductList" inverseName="categoryDetails" inverseEntity="ProductList" syncable="YES"/>
+    </entity>
+    <entity name="ProductList" representedClassName="ProductList" syncable="YES">
+        <attribute name="productAddedDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tax" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vat" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="categoryDetails" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductlCategory" inverseName="productDetails" inverseEntity="ProductlCategory" syncable="YES"/>
+        <relationship name="rankingDetails" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Rankings" inverseName="productRanking" inverseEntity="Rankings" syncable="YES"/>
+        <relationship name="variantsDetails" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VariantsList" inverseName="productVariants" inverseEntity="VariantsList" syncable="YES"/>
+    </entity>
+    <entity name="Rankings" representedClassName="Rankings" syncable="YES">
+        <attribute name="rankingName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rankingTypeCount" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="productRanking" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductList" inverseName="rankingDetails" inverseEntity="ProductList" syncable="YES"/>
+    </entity>
+    <entity name="VariantsList" representedClassName="VariantsList" syncable="YES">
+        <attribute name="variantColor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="variantId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="variantPrice" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="variantSize" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="productVariants" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductList" inverseName="variantsDetails" inverseEntity="ProductList" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ChildCategory" positionX="-27" positionY="72" width="128" height="75"/>
+        <element name="ProductlCategory" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="ProductList" positionX="-54" positionY="9" width="128" height="165"/>
+        <element name="Rankings" positionX="-54" positionY="72" width="128" height="90"/>
+        <element name="VariantsList" positionX="-45" positionY="63" width="128" height="120"/>
+    </elements>
+</model>
