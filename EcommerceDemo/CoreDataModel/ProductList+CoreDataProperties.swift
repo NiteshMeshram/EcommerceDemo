@@ -2,7 +2,7 @@
 //  ProductList+CoreDataProperties.swift
 //  EcommerceDemo
 //
-//  Created by V2Solutions on 18/03/18.
+//  Created by Nitesh Meshram on 3/22/18.
 //  Copyright © 2018 NItesh. All rights reserved.
 //
 //
@@ -23,8 +23,25 @@ extension ProductList {
     @NSManaged public var tax: String?
     @NSManaged public var vat: String?
     @NSManaged public var categoryDetails: ProductlCategory?
+    @NSManaged public var rankingDetails: NSSet?
     @NSManaged public var variantsDetails: NSSet?
-    @NSManaged public var rankingDetails: Rankings?
+
+}
+
+// MARK: Generated accessors for rankingDetails
+extension ProductList {
+
+    @objc(addRankingDetailsObject:)
+    @NSManaged public func addToRankingDetails(_ value: Rankings)
+
+    @objc(removeRankingDetailsObject:)
+    @NSManaged public func removeFromRankingDetails(_ value: Rankings)
+
+    @objc(addRankingDetails:)
+    @NSManaged public func addToRankingDetails(_ values: NSSet)
+
+    @objc(removeRankingDetails:)
+    @NSManaged public func removeFromRankingDetails(_ values: NSSet)
 
 }
 

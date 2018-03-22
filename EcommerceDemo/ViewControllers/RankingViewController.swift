@@ -83,8 +83,14 @@ extension RankingViewController: UITableViewDelegate, UITableViewDataSource {
         
 //        return (rankingDataSource[section].productRanking?.count)!
         
-        
-        return productsAggregate![section])
+        if let aggregate = self.productsAggregate?[section] {
+            if let rankingName = aggregate["rankingName"] as? String {
+            
+                DataManager.sharedInstance.productsWith(rankingName: rankingName)
+            }
+        }
+        return 0
+//        return productsAggregate![section]
     }
     
 //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

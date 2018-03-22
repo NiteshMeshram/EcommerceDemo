@@ -2,7 +2,7 @@
 //  Rankings+CoreDataClass.swift
 //  EcommerceDemo
 //
-//  Created by Nitesh Meshram on 3/21/18.
+//  Created by Nitesh Meshram on 3/22/18.
 //  Copyright © 2018 NItesh. All rights reserved.
 //
 //
@@ -12,5 +12,5 @@ import CoreData
 
 @objc(Rankings)
 public class Rankings: NSManagedObject {
-    
+
 }

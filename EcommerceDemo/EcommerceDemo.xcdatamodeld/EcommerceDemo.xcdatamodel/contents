@@ -17,7 +17,7 @@
         <attribute name="tax" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="vat" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="categoryDetails" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductlCategory" inverseName="productDetails" inverseEntity="ProductlCategory" syncable="YES"/>
-        <relationship name="rankingDetails" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Rankings" inverseName="productRanking" inverseEntity="Rankings" syncable="YES"/>
+        <relationship name="rankingDetails" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Rankings" inverseName="productRanking" inverseEntity="Rankings" syncable="YES"/>
         <relationship name="variantsDetails" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VariantsList" inverseName="productVariants" inverseEntity="VariantsList" syncable="YES"/>
     </entity>
     <entity name="Rankings" representedClassName="Rankings" syncable="YES">

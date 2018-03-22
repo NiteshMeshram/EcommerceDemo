@@ -2,7 +2,7 @@
 //  VariantsList+CoreDataProperties.swift
 //  EcommerceDemo
 //
-//  Created by V2Solutions on 18/03/18.
+//  Created by Nitesh Meshram on 3/22/18.
 //  Copyright © 2018 NItesh. All rights reserved.
 //
 //

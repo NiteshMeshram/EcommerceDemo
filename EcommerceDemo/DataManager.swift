@@ -139,32 +139,32 @@ class DataManager {
         
         let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
         
-        
         if let productsArray = dictionary["products"] as? [[String: Any]] { // Start Product Array
-            //            print(productsArray.count)
             
             _ = productsArray.map{ // Start of Map
                 
                 if let (prod, rankingCount) = self.fetchProduct(dictionary: $0 as [String : AnyObject]) as? (ProductList, String ) {
                     
+                    let predicate = NSPredicate(format: "rankingName = %@ AND rankingTypeCount = %@ ",(dictionary["ranking"] as? String)!,rankingCount)
                     
-                    if let rankingsEntity = NSEntityDescription.insertNewObject(forEntityName: "Rankings", into: context) as? Rankings {
-                        // rankingsEntity start
+                    if !(checkDataExistOrNot(predicate: predicate, entityName: "Rankings")) {
                         
-                        rankingsEntity.rankingName = dictionary["ranking"] as? String
-                        
-                        rankingsEntity.rankingTypeCount = rankingCount
-                        rankingsEntity.productRanking = prod
-                        
-                        do {
-                            try rankingsEntity.managedObjectContext?.save()
+                        if let rankingsEntity = NSEntityDescription.insertNewObject(forEntityName: "Rankings", into: context) as? Rankings {
                             
-                        } catch {
-                            let saveError = error as NSError
-                            print(saveError)
+                            rankingsEntity.rankingName = dictionary["ranking"] as? String
+                            rankingsEntity.rankingTypeCount = rankingCount
+                            prod.addToRankingDetails(rankingsEntity)
+                            
+                            do {
+                                try rankingsEntity.managedObjectContext?.save()
+                                
+                            } catch {
+                                let saveError = error as NSError
+                                print(saveError)
+                            }
+                            
                         }
-                        
-                    } // rankingsEntity End
+                    }
                 }
             } // End of Map
         } // End Product Array
@@ -422,6 +422,46 @@ class DataManager {
         
         return results
     }
+    
+    func productsWith(rankingName:String) -> () {
+        let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Rankings")
+        request.predicate = NSPredicate(format: "rankingName = %@", rankingName)
+//        request.sortDescriptors = [NSSortDescriptor(key: "productName", ascending: true)]
+        
+//        var results:[Product]?
+        
+        do {
+           let results = try context.fetch(request)// as? [Product]
+            print(results)
+        } catch let err as NSError {
+            print(err.debugDescription)
+            //return []
+        }
+        
+//        return results
+    }
+    
+    /*
+     
+     let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
+     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProductList")
+     
+     do {
+     let results = try context.fetch(fetchRequest)
+     let  allProducts = results as! [ProductList]
+     
+     //            print("\(allProducts)")
+     return allProducts
+     
+     }catch let err as NSError {
+     print(err.debugDescription)
+     return []
+     }
+     
+     return []
+     
+     */
     
 }
 
